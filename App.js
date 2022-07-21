@@ -4,14 +4,17 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 import HomeScreen from "./src/Screens/home";
 import DetailsScreen from "./src/Screens/details";
+import PositionScreen from "./src/Screens/location";
+import SearchScreen from "./src/Screens/search";
+import LocationScreen from "./src/Screens/location";
 
 const HomeStack = createNativeStackNavigator();
-
-const Tab = createBottomTabNavigator();
 
 function HomeStackScreen() {
   return (
@@ -22,31 +25,60 @@ function HomeStackScreen() {
   );
 }
 
-const SettingsStack = createNativeStackNavigator();
+const SearchStack = createNativeStackNavigator();
 
-function SettingsStackScreen() {
+function SearchStackScreen() {
   return (
-    <SettingsStack.Navigator>
-      {/* <SettingsStack.Screen name="Settings" component={SettingsScreen} /> */}
-      <SettingsStack.Screen name="Details" component={DetailsScreen} />
-    </SettingsStack.Navigator>
+    <SearchStack.Navigator>
+      <SearchStack.Screen name="Search" component={SearchScreen} />
+    </SearchStack.Navigator>
   );
 }
 
+const LocationStack = createNativeStackNavigator();
+
+function LocationStackScreen() {
+  return (
+    <LocationStack.Navigator>
+      <LocationStack.Screen name="Location" component={LocationScreen} />
+    </LocationStack.Navigator>
+  );
+}
+
+const Tab = createBottomTabNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Navigator
+        screenOptions={{ headerShown: false, tabBarShowLabel: false }}
+      >
         <Tab.Screen
           name="HomeStack"
           component={HomeStackScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
+              <AntDesign name="home" color={color} size={size} />
             ),
           }}
         />
-        <Tab.Screen name="Settings" component={SettingsStackScreen} />
+        <Tab.Screen
+          name="SearchStack"
+          component={SearchStackScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <FontAwesome name="search" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="PositionStack"
+          component={LocationStackScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="location" color={color} size={size} />
+            ),
+          }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
