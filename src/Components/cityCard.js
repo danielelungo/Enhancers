@@ -1,8 +1,8 @@
-import { View, Text, Button, Image } from "react-native";
+import { View, Text, Button, Image, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import { api } from "../api/api";
 
-const CityCard = ({ cityName }) => {
+const CityCard = ({ cityName, navigation }) => {
   const [weather, setWeather] = useState([]);
 
   const searchWeather = () => {
@@ -18,9 +18,16 @@ const CityCard = ({ cityName }) => {
   useEffect(() => {
     searchWeather();
   }, []);
-  console.log("mamam", weather?.weather?.[0].icon);
   return (
-    <>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate("Details", {
+          cityName,
+          lat: weather?.coord?.lat,
+          lon: weather?.coord?.lon,
+        })
+      }
+    >
       <Text>{cityName}</Text>
       {weather?.weather?.[0].icon ? (
         <Image
@@ -31,7 +38,7 @@ const CityCard = ({ cityName }) => {
         />
       ) : null}
       <Text>{Math.round(weather?.main?.temp)}°</Text>
-    </>
+    </TouchableOpacity>
   );
 };
 
