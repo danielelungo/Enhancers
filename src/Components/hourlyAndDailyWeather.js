@@ -5,7 +5,7 @@ import DailyCard from "./dailyCard";
 import HourlyCard from "./hourlyCard";
 import styled from "styled-components";
 
-const HourlyAndDailyWeather = ({ lat, lon }) => {
+const HourlyAndDailyWeather = ({ lat, lon, searchText }) => {
   const [weather, setWeather] = useState();
 
   const searchDaily = () => {
@@ -22,7 +22,7 @@ const HourlyAndDailyWeather = ({ lat, lon }) => {
 
   useEffect(() => {
     searchDaily();
-  }, [lat, lon]);
+  }, [lat, lon, searchText]);
 
   return (
     <ScrollView>

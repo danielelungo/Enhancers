@@ -28,6 +28,7 @@ const SearchScreen = () => {
       <Text>{weather?.weather?.[0].main}</Text>
       {weather ? (
         <HourlyAndDailyWeather
+          searchText={text}
           lat={weather.coord.lat}
           lon={weather.coord.lon}
         />
