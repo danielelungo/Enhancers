@@ -1,7 +1,7 @@
-import { View, Text, Button, Image, TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import { api } from "../constants/api";
-import { completeData } from "../constants/datesAndTimes";
+import { completeDay, completeMonth } from "../constants/datesAndTimes";
 import styled from "styled-components";
 
 const CityCard = ({ cityName, navigation, timeZone }) => {
@@ -20,6 +20,7 @@ const CityCard = ({ cityName, navigation, timeZone }) => {
   useEffect(() => {
     searchWeather();
   }, []);
+
   return (
     <TouchableOpacity
       onPress={() =>
@@ -30,18 +31,11 @@ const CityCard = ({ cityName, navigation, timeZone }) => {
         })
       }
     >
-      <View
-        style={{
-          backgroundColor: "#6090ED",
-          display: "flex",
-          flexDirection: "row",
-          borderRadius: 15,
-          margin: 20,
-        }}
-      >
+      <Wrapper>
         <CardText>
           <CityName>{cityName}</CityName>
-          <Date>{completeData}</Date>
+          <Date>{completeDay}</Date>
+          <Date>{completeMonth}</Date>
           <Time>{timeZone}</Time>
         </CardText>
 
@@ -58,11 +52,19 @@ const CityCard = ({ cityName, navigation, timeZone }) => {
         <AlignedView>
           <Temp>{Math.round(weather?.main?.temp)}°</Temp>
         </AlignedView>
-      </View>
+      </Wrapper>
     </TouchableOpacity>
   );
 };
 export default CityCard;
+
+const Wrapper = styled.View`
+  background-color: #6090ed;
+  display: flex;
+  flex-direction: row;
+  border-radius: 15px;
+  margin: 20px;
+`;
 
 const CardText = styled.View`
   margin: 15px 0px 15px 15px;
@@ -79,10 +81,10 @@ const Date = styled.Text`
   color: white;
   font-size: 15px;
   font-weight: bold;
-  margin-bottom: 10px;
 `;
 const Time = styled.Text`
   color: white;
+  margin-top: 10px;
   margin-bottom: 10px;
 `;
 
