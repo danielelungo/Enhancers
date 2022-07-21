@@ -30,8 +30,8 @@ export const curr_month = newDate.getMonth();
 export const curr_day = newDate.getDay();
 export const curr_hour = newDate.getHours();
 
-export const completeData = `${d_names[curr_day]} ${curr_date}, \n ${m_names[curr_month]}`;
-
+export const completeDay = `${d_names[curr_day]} ${curr_date}, `;
+export const completeMonth = m_names[curr_month];
 export const romeTime = newDate
   .toLocaleTimeString("en-US", {
     timeZone: "Europe/Rome",
