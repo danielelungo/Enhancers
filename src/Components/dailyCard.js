@@ -1,16 +1,7 @@
 import { View, Text, Button, Image } from "react-native";
+import { d_names } from "../constants/datesAndTimes";
 
 const DailyCard = ({ dailyData }) => {
-  const d_names = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
   const day = new Date(dailyData.dt * 1000).getDay();
   return (
     <View>

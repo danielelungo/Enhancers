@@ -1,8 +1,9 @@
 import { View, Text, Button, Image, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
-import { api } from "../api/api";
+import { api } from "../constants/api";
+import { completeData } from "../constants/datesAndTimes";
 
-const CityCard = ({ cityName, navigation }) => {
+const CityCard = ({ cityName, navigation, timeZone }) => {
   const [weather, setWeather] = useState([]);
 
   const searchWeather = () => {
@@ -29,6 +30,8 @@ const CityCard = ({ cityName, navigation }) => {
       }
     >
       <Text>{cityName}</Text>
+      <Text>{timeZone}</Text>
+      <Text>{completeData}</Text>
       {weather?.weather?.[0].icon ? (
         <Image
           source={{

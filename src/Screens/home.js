@@ -1,4 +1,5 @@
 import { View, Text, Button, ScrollView } from "react-native";
+import { londonTime, romeTime } from "../constants/datesAndTimes";
 import CityCard from "../Components/cityCard";
 
 const HomeScreen = ({ navigation }) => {
@@ -13,13 +14,21 @@ const HomeScreen = ({ navigation }) => {
         }}
       >
         <Text>Home Screen</Text>
-        <CityCard cityName="london" />
-        <CityCard cityName="turin" />
-        <CityCard cityName="rome" />
-        <Button
+        <CityCard
+          cityName="london"
+          navigation={navigation}
+          timeZone={londonTime}
+        />
+        <CityCard
+          cityName="turin"
+          navigation={navigation}
+          timeZone={romeTime}
+        />
+        <CityCard cityName="rome" navigation={navigation} timeZone={romeTime} />
+        {/* <Button
           title="Go to Details"
           onPress={() => navigation.navigate("Details")}
-        />
+        /> */}
       </View>
     </ScrollView>
   );
