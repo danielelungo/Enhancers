@@ -7,7 +7,7 @@ const SearchScreen = () => {
   const [text, setText] = useState("");
   const [weather, setWeather] = useState();
 
-  const search = (evt) => {
+  const search = () => {
     fetch(`${api.url}weather?q=${text}&units=metric&APPID=${api.key}`)
       .then((res) => res.json())
       .then((result) => {
@@ -16,7 +16,7 @@ const SearchScreen = () => {
         setWeather(result);
       });
   };
-  console.log("MAREMMA", weather);
+
   return (
     <View>
       <TextInput
@@ -26,7 +26,6 @@ const SearchScreen = () => {
         onSubmitEditing={search}
       />
       <Text>{weather?.weather?.[0].main}</Text>
-      {/* <Text>{Math.round(weather?.main?.temp)}°</Text> */}
       {weather ? (
         <HourlyAndDailyWeather
           lat={weather.coord.lat}
