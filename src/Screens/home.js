@@ -5,30 +5,19 @@ import CityCard from "../Components/cityCard";
 const HomeScreen = ({ navigation }) => {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "blue",
-        }}
-      >
+      <View>
         <Text>Home Screen</Text>
         <CityCard
-          cityName="london"
+          cityName="London"
           navigation={navigation}
           timeZone={londonTime}
         />
         <CityCard
-          cityName="turin"
+          cityName="Turin"
           navigation={navigation}
           timeZone={romeTime}
         />
-        <CityCard cityName="rome" navigation={navigation} timeZone={romeTime} />
-        {/* <Button
-          title="Go to Details"
-          onPress={() => navigation.navigate("Details")}
-        /> */}
+        <CityCard cityName="Rome" navigation={navigation} timeZone={romeTime} />
       </View>
     </ScrollView>
   );
