@@ -1,33 +1,42 @@
-import { View, Text, Button, ScrollView } from "react-native";
-import { useState, useEffect } from "react";
+import { ScrollView } from "react-native";
 import { curr_hour } from "../constants/datesAndTimes";
+import styled from "styled-components";
+import { FontAwesome } from "@expo/vector-icons";
 
 const HourlyCard = ({ hourlyData }) => {
-  console.log("£", hourlyData);
-
-  //   const date = new Date(hourlyData?.dt * 1000).getHours();
   const getTime = (h) => new Date(h).getHours();
   return (
-    <View>
+    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
       {hourlyData?.slice(0, 12).map((hour) => (
-        <View key={hour.dt}>
-          <Text>{Math.round(hour.temp)}°</Text>
-          <Text>
+        <Card key={hour.dt}>
+          <Hour>
             {getTime(hour.dt * 1000) === curr_hour
               ? "Now"
               : getTime(hour.dt * 1000) > 12
               ? `${getTime(hour.dt * 1000)} p.m.`
               : `${getTime(hour.dt * 1000)} a.m.`}
-            {/* {new Date(hour.dt * 1000).getHours() === new Date().getHours()
-              ? "Now"
-              : new Date(hour.dt * 1000).getHours() > 12
-              ? `${new Date(hour.dt * 1000).getHours()} p.m.`
-              : `${new Date(hour.dt * 1000).getHours()} a.m.`} */}
-          </Text>
-        </View>
+          </Hour>
+          <FontAwesome name="circle" size={24} color="white" />
+          <Temp>{Math.round(hour.temp)}°</Temp>
+        </Card>
       ))}
-    </View>
+    </ScrollView>
   );
 };
+
+const Hour = styled.Text`
+  color: white;
+  margin-bottom: 10px;
+`;
+const Temp = styled.Text`
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+`;
+
+const Card = styled.View`
+  margin-right: 15px;
+`;
 
 export default HourlyCard;
