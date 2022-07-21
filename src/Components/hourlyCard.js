@@ -6,7 +6,11 @@ import { FontAwesome } from "@expo/vector-icons";
 const HourlyCard = ({ hourlyData }) => {
   const getTime = (h) => new Date(h).getHours();
   return (
-    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+    <ScrollView
+      horizontal={true}
+      showsHorizontalScrollIndicator={false}
+      style={{ marginLeft: 15, marginRight: 15 }}
+    >
       {hourlyData?.slice(0, 12).map((hour) => (
         <Card key={hour.dt}>
           <Hour>
