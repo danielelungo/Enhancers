@@ -1,12 +1,13 @@
-import { View, Text, Button, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import { londonTime, romeTime } from "../constants/datesAndTimes";
 import CityCard from "../Components/cityCard";
+import styled from "styled-components";
 
 const HomeScreen = ({ navigation }) => {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View>
-        <Text>Home Screen</Text>
+        <Title>{`Good morning! \n Mario`}</Title>
         <CityCard
           cityName="London"
           navigation={navigation}
@@ -22,5 +23,14 @@ const HomeScreen = ({ navigation }) => {
     </ScrollView>
   );
 };
+
+const Title = styled.Text`
+  color: #01175f;
+  text-align: center;
+  font-size: 35px;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 15px;
+`;
 
 export default HomeScreen;
