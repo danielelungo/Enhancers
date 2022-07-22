@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const LocationScreen = () => {
   const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -23,11 +23,11 @@ const LocationScreen = () => {
 
   return (
     <View>
-      {errorMsg || location ? (
+      {errorMsg ? (
         <CustomText>{errorMsg}</CustomText>
-      ) : (
-        <CustomText>"Waiting for permission..."</CustomText>
-      )}
+      ) : !location ? (
+        <CustomText>Waiting for permission...</CustomText>
+      ) : null}
       {location && (
         <HourlyAndDailyWeather
           lat={location?.coords?.latitude}
