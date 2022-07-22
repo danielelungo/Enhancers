@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { View, Text, Button } from "react-native";
+import { View } from "react-native";
 import * as Location from "expo-location";
 import HourlyAndDailyWeather from "../Components/hourlyAndDailyWeather";
+import styled from "styled-components";
 
 const LocationScreen = () => {
   const [location, setLocation] = useState(null);
@@ -23,9 +24,9 @@ const LocationScreen = () => {
   return (
     <View>
       {errorMsg || location ? (
-        <Text>{errorMsg}</Text>
+        <CustomText>{errorMsg}</CustomText>
       ) : (
-        <Text>"Waiting for permission..."</Text>
+        <CustomText>"Waiting for permission..."</CustomText>
       )}
       {location && (
         <HourlyAndDailyWeather
@@ -36,5 +37,12 @@ const LocationScreen = () => {
     </View>
   );
 };
+
+const CustomText = styled.Text`
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 25px;
+`;
 
 export default LocationScreen;
