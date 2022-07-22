@@ -6,7 +6,6 @@ import styled from "styled-components";
 
 const CityCard = ({ cityName, navigation, timeZone }) => {
   const [weather, setWeather] = useState([]);
-
   const searchWeather = () => {
     fetch(`${api.url}weather?q=${cityName}&units=metric&APPID=${api.key}`)
       .then((res) => {
@@ -31,7 +30,7 @@ const CityCard = ({ cityName, navigation, timeZone }) => {
         })
       }
     >
-      <Wrapper>
+      <Wrapper color={weather?.weather?.[0].main}>
         <CardText>
           <CityName>{cityName}</CityName>
           <Date>{completeDay}</Date>
@@ -59,7 +58,14 @@ const CityCard = ({ cityName, navigation, timeZone }) => {
 export default CityCard;
 
 const Wrapper = styled.View`
-  background-color: #6090ed;
+  background-color: ${({ color }) =>
+    color === "Clear"
+      ? "#6090ed"
+      : color === "Rain"
+      ? "#3463A6"
+      : color === "Clouds"
+      ? "#768396"
+      : "#F1F1F1"};
   display: flex;
   flex-direction: row;
   border-radius: 15px;

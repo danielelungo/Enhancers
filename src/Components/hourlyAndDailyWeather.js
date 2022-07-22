@@ -5,9 +5,8 @@ import DailyCard from "./dailyCard";
 import HourlyCard from "./hourlyCard";
 import styled from "styled-components";
 
-const HourlyAndDailyWeather = ({ lat, lon, searchText }) => {
+const HourlyAndDailyWeather = ({ lat, lon, searchText, childToParent }) => {
   const [weather, setWeather] = useState();
-
   const searchDaily = () => {
     fetch(
       `${api.url}onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=metric&appid=${api.key}`
@@ -17,6 +16,7 @@ const HourlyAndDailyWeather = ({ lat, lon, searchText }) => {
       })
       .then((data) => {
         setWeather(data);
+        childToParent(data?.current?.weather?.[0]?.main);
       });
   };
 
@@ -25,8 +25,8 @@ const HourlyAndDailyWeather = ({ lat, lon, searchText }) => {
   }, [lat, lon, searchText]);
 
   return (
-    <ScrollView>
-      <Wrapper>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <Wrapper color={weather?.current?.weather?.[0]?.main}>
         <Weather>{weather?.current?.weather?.[0].main}</Weather>
         <Flex>
           <Image
@@ -35,7 +35,9 @@ const HourlyAndDailyWeather = ({ lat, lon, searchText }) => {
             }}
             style={{ width: 150, height: 150 }}
           />
-          <Temp>{Math.round(weather?.current?.temp)}°</Temp>
+          {!isNaN(weather?.current?.temp) && (
+            <Temp>{Math.round(weather?.current?.temp)}°</Temp>
+          )}
         </Flex>
         <HourlyCard hourlyData={weather?.hourly} />
         <ScrollView
@@ -52,10 +54,17 @@ const HourlyAndDailyWeather = ({ lat, lon, searchText }) => {
   );
 };
 const Wrapper = styled.View`
+  background-color: ${({ color }) =>
+    color === "Clear"
+      ? "#6090ed"
+      : color === "Rain"
+      ? "#3463A6"
+      : color === "Clouds"
+      ? "#768396"
+      : "#F1F1F1"};
   align-items: center;
   justify-content: center;
-  background-color: #6090ed;
-  height: 100%;
+  padding-bottom: 200px;
 `;
 const Flex = styled.View`
   margin: 30px;
@@ -75,6 +84,7 @@ const Temp = styled.Text`
 const Weather = styled.Text`
   color: white;
   font-size: 20px;
+  font-weight: 500;
 `;
 
 export default HourlyAndDailyWeather;
