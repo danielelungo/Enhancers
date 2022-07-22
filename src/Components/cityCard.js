@@ -48,9 +48,11 @@ const CityCard = ({ cityName, navigation, timeZone }) => {
             />
           </AlignedView>
         ) : null}
-        <AlignedView>
-          <Temp>{Math.round(weather?.main?.temp)}°</Temp>
-        </AlignedView>
+        {!isNaN(weather?.main?.temp) && (
+          <AlignedView>
+            <Temp>{Math.round(weather?.main?.temp)}°</Temp>
+          </AlignedView>
+        )}
       </Wrapper>
     </TouchableOpacity>
   );
@@ -98,7 +100,7 @@ const Temp = styled.Text`
   color: white;
   font-size: 40px;
   font-weight: bold;
-  margin-left: 20px;
+  margin-left: 15px;
 `;
 
 const AlignedView = styled.View`
